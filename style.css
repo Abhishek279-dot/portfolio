@@ -1159,36 +1159,39 @@ box-shadow:0 8px 25px rgba(157,78,221,0.7);
 @media (max-width: 768px) {
 
   /* NAVBAR */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #001f54;
+}
+
+@media (max-width: 768px) {
   .navbar {
     padding: 0 20px;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 15px 20px;
+  }
+  .hamburger {
+    display: block;
   }
   .nav-links {
     display: none;
-  }
-
-  /* HERO */
-  .hero {
     flex-direction: column;
-    padding: 30px 20px;
-    text-align: center;
-  }
-  .hero-left {
     width: 100%;
+    gap: 10px;
+    padding: 10px 0;
   }
-  .intro {
-    font-size: 32px;
+  .nav-links.open {
+    display: flex;
   }
-  .role {
-    font-size: 18px;
+  .nav-links a {
+    font-size: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
   }
-  .hero-right {
-    width: 220px;
-    height: 220px;
-    margin-top: 30px;
-  }
-  .socials {
-    justify-content: center;
-  }
+}
 
   /* ABOUT */
   .about {
