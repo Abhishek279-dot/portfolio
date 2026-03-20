@@ -11,7 +11,7 @@
 
 ### A clean, responsive personal portfolio website built with HTML, CSS & JavaScript.
 
-[🌐 Live Demo](https://portfolio-mu-eight-228jk4rcy7.vercel.app/) • [📬 Contact Me](#contact) • [⭐ Star this Repo](#)
+[🌐 Live Demo](https://abhishek279-dot.github.io/portfolio/) • [📬 Contact Me](#contact) • [⭐ Star this Repo](#)
 
 </div>
 
