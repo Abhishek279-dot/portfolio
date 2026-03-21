@@ -19,6 +19,10 @@
  
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css" />
+
+
+    <!-- SupaBase DB Connnection -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
  
   <body>
@@ -413,50 +417,54 @@
     </section>
  
  
-    <!-- ===== CONTACT SECTION ===== -->
-    <section class="contact" id="contact">
- 
-      <h2 class="contact-title">😊 Get In <span>Touch</span></h2>
- 
-      <div class="contact-container">
- 
-        <!-- Left Image -->
-        <div class="contact-left">
-          <img src="iconss/contact.png" alt="contact image" />
+<!-- ===== CONTACT SECTION ===== -->
+<section class="contact" id="contact">
+
+  <h2 class="contact-title">😊 Get In <span>Touch</span></h2>
+
+  <div class="contact-container">
+
+    <!-- Left Image -->
+    <div class="contact-left">
+      <img src="iconss/contact.png" alt="contact image" />
+    </div>
+
+    <!-- Right Form -->
+    <div class="contact-right">
+
+      <!-- Message Box -->
+      <div id="form-message" style="display:none;"></div>
+
+      <form id="contactForm">
+
+        <div class="input-box">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="name" placeholder="Enter Your Name" required />
         </div>
- 
-        <!-- Right Form -->
-        <div class="contact-right">
-          <form>
- 
-            <div class="input-box">
-              <i class="fa-solid fa-user"></i>
-              <input type="text" placeholder="Enter Your Name" required />
-            </div>
- 
-            <div class="input-box">
-              <i class="fa-solid fa-envelope"></i>
-              <input type="email" placeholder="Enter Your Email" required />
-            </div>
- 
-            <div class="input-box">
-              <i class="fa-solid fa-phone"></i>
-              <input type="text" placeholder="Enter Number" required />
-            </div>
- 
-            <div class="input-box textarea">
-              <i class="fa-solid fa-comment"></i>
-              <textarea placeholder="Message"></textarea>
-            </div>
- 
-            <button class="contact-btn">Submit ✈</button>
- 
-          </form>
+
+        <div class="input-box">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="email" placeholder="Enter Your Email" required />
         </div>
- 
-      </div>
- 
-    </section>
+
+        <div class="input-box">
+          <i class="fa-solid fa-phone"></i>
+          <input type="text" id="phone" placeholder="Enter Number" required />
+        </div>
+
+        <div class="input-box textarea">
+          <i class="fa-solid fa-comment"></i>
+          <textarea id="message" placeholder="Message"></textarea>
+        </div>
+
+        <button class="contact-btn" type="submit" id="submitBtn">Submit ✈</button>
+
+      </form>
+    </div>
+
+  </div>
+
+</section>
  
  
     <!-- ===== FOOTER ===== -->
@@ -519,57 +527,97 @@
  
  
     <!-- ===== SCRIPTS ===== -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script>
- 
-      /* Typed.js - Typing Animation */
-      var typed = new Typed("#typing", {
-        strings: ["Data Scientist", "FullStack Developer", "AI-ML Engineer"],
-        typeSpeed: 70,
-        backSpeed: 40,
-        backDelay: 1500,
-        loop: true,
-      });
- 
-      /* Certificate Modal */
-      const modal = document.getElementById("certiModal");
-      const preview = document.getElementById("certiPreview");
-      const buttons = document.querySelectorAll(".certi-btn");
-      const closeBtn = document.querySelector(".close-modal");
- 
-      /* Open modal */
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const img = btn.getAttribute("data-img");
-          preview.src = img;
-          modal.style.display = "flex";
-          document.body.style.overflow = "hidden";
-        });
-      });
- 
-      /* Close button */
-      closeBtn.onclick = () => {
-        modal.style.display = "none";
-        preview.src = "";
-        document.body.style.overflow = "auto";
-      };
- 
-      /* Click outside to close */
-      modal.onclick = (e) => {
-        if (e.target === modal) {
-          modal.style.display = "none";
-          preview.src = "";
-          document.body.style.overflow = "auto";
-        }
-      };
- 
-      /* Hamburger Menu Toggle */
-      function toggleMenu() {
-        const nav = document.querySelector(".nav-links");
-        nav.classList.toggle("open");
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+
+  /* Typed.js - Typing Animation */
+  var typed = new Typed("#typing", {
+    strings: ["Data Scientist", "FullStack Developer", "AI-ML Engineer"],
+    typeSpeed: 70,
+    backSpeed: 40,
+    backDelay: 1500,
+    loop: true,
+  });
+
+  /* Certificate Modal */
+  const modal = document.getElementById("certiModal");
+  const preview = document.getElementById("certiPreview");
+  const buttons = document.querySelectorAll(".certi-btn");
+  const closeBtn = document.querySelector(".close-modal");
+
+  /* Open modal */
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const img = btn.getAttribute("data-img");
+      preview.src = img;
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  /* Close button */
+  closeBtn.onclick = () => {
+    modal.style.display = "none";
+    preview.src = "";
+    document.body.style.overflow = "auto";
+  };
+
+  /* Click outside to close */
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      preview.src = "";
+      document.body.style.overflow = "auto";
+    }
+  };
+
+  /* Hamburger Menu Toggle */
+  function toggleMenu() {
+    const nav = document.querySelector(".nav-links");
+    nav.classList.toggle("open");
+  }
+
+  /* ===== SUPABASE CONTACT FORM ===== */
+  window.addEventListener("load", function () {
+    const supabase = window.supabase.createClient(
+      "https://yinhvjgrhhewahfnoifx.supabase.co",
+      "sb_publishable_9oysHSumYyInbH72BIvk1A_NBp-AgxE"
+    );
+
+    document.getElementById("contactForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById("submitBtn");
+      const msgBox = document.getElementById("form-message");
+
+      const name    = document.getElementById("name").value.trim();
+      const email   = document.getElementById("email").value.trim();
+      const phone   = document.getElementById("phone").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      submitBtn.textContent = "Sending... ⏳";
+      submitBtn.disabled = true;
+
+      const { error } = await supabase
+        .from("contacts")
+        .insert([{ name, email, phone, message }]);
+
+      if (error) {
+        msgBox.style.cssText = "display:block; background:#fee2e2; color:#991b1b; border-radius:8px; padding:12px 18px; margin-bottom:16px;";
+        msgBox.textContent = "❌ Something went wrong. Please try again!";
+      } else {
+        msgBox.style.cssText = "display:block; background:#d1fae5; color:#065f46; border-radius:8px; padding:12px 18px; margin-bottom:16px;";
+        msgBox.textContent = "✅ Message sent! I'll get back to you soon 😊";
+        document.getElementById("contactForm").reset();
       }
- 
-    </script>
+
+      submitBtn.textContent = "Submit ✈";
+      submitBtn.disabled = false;
+      setTimeout(() => { msgBox.style.display = "none"; }, 5000);
+    });
+  });
+
+</script>
  
   </body>
 </html>
