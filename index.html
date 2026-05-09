@@ -26,6 +26,9 @@
   </head>
  
   <body>
+
+    <div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
  
     <!-- ===== HEADER / NAVBAR ===== -->
     <header>
@@ -551,6 +554,30 @@
     backDelay: 1500,
     loop: true,
   });
+
+  /* ===== CUSTOM CURSOR ===== */
+const cursor     = document.getElementById("cursor");
+const cursorRing = document.getElementById("cursorRing");
+
+window.addEventListener("mousemove", (e) => {
+  cursor.style.left     = e.clientX + "px";
+  cursor.style.top      = e.clientY + "px";
+  cursorRing.style.left = e.clientX + "px";
+  cursorRing.style.top  = e.clientY + "px";
+});
+
+document.querySelectorAll("a, button").forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    cursor.classList.add("hover");
+    cursorRing.classList.add("hover");
+  });
+  el.addEventListener("mouseleave", () => {
+    cursor.classList.remove("hover");
+    cursorRing.classList.remove("hover");
+  });
+});
+
+
 
   /* Certificate Modal */
   const modal = document.getElementById("certiModal");
