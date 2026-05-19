@@ -27,49 +27,6 @@
   box-sizing: border-box;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-/* ===== CUSTOM CURSOR ===== */
-* {
-  cursor: none;
-}
-
-.cursor {
-  width: 12px;
-  height: 12px;
-  background: #001f54;
-  border-radius: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, background 0.2s ease;
-}
-
-.cursor-ring {
-  width: 35px;
-  height: 35px;
-  border: 2px solid #001f54;
-  border-radius: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 99998;
-  transform: translate(-50%, -50%);
-  transition: all 0.15s ease;
-}
-
-/* Hover effect */
-.cursor.hover {
-  background: crimson;
-  transform: translate(-50%, -50%) scale(1.5);
-}
-
-.cursor-ring.hover {
-  border-color: crimson;
-  transform: translate(-50%, -50%) scale(1.5);
-}
 
 
 
